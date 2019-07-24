@@ -5,6 +5,9 @@ import VueRouter from 'vue-router'
 import PhotoList from './pages/PhotoList.vue'
 import Login from './pages/Login.vue'
 
+// ストアインポート
+import store from './store'
+
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
 Vue.use(VueRouter)
@@ -17,7 +20,18 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+    // 定義されたルートに切り替わる直前に呼ばれる関数
+    // to-アクセスされようとしているルートのルートオブジェクト
+    // from-アクセス元のルート
+    // next-ページの移動先引数なしだとそのまま
+    beforeEnter(to, from, next){
+      if (store.getters['auth/check']) {
+        next('/')
+      } else {
+        next()
+      }
+    }
   }
 ]
 
