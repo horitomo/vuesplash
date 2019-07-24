@@ -2,7 +2,13 @@ const state = {
                     user:null
 }
 
-const getters = {}
+const getters = {
+  // checkはログインチェックに使用
+  // 確実に真偽値を判定するため二重否定
+  check: state => !! state.user,
+  username: state => state.user ? state.user.name : ''
+  
+}
 
 const mutations = {
                     setUser (state, user) {
