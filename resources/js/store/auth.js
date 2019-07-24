@@ -28,6 +28,13 @@ const actions = {
                     async logout (context) {
                       const response = await axios.post('/api/logout')
                       context.commit('setUser', null)
+                    },
+                    async currentUser (context) {
+                      const response = await axios.get('/api/user')
+                      // ログインしていないとから文字になる
+                      // userステートの初期値で揃えるために真偽値チェックでnullを入れる
+                      const user = response.data || null
+                      context.commit('setUser', user)
                     }
 }
 
