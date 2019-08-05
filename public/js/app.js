@@ -1977,13 +1977,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
-<<<<<<< HEAD
-  computed: {
-    apiStatus: function apiStatus() {
-      return this.$store.state.auth.apiStatus;
-    }
-  },
-=======
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     apiStatus: function apiStatus(state) {
       return state.auth.apiStatus;
@@ -1995,7 +1988,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return state.auth.registerErrorMessages;
     }
   }),
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
   methods: {
     login: function () {
       var _login = _asyncToGenerator(
@@ -20230,13 +20222,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = {
   user: null,
-<<<<<<< HEAD
-  apiStatus: null
-=======
   apiStatus: null,
   loginErrorMessages: null,
   registerErrorMessages: null
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
 };
 var getters = {
   check: function check(state) {
@@ -20252,15 +20240,12 @@ var mutations = {
   },
   setApiStatus: function setApiStatus(state, status) {
     state.apiStatus = status;
-<<<<<<< HEAD
-=======
   },
   setLoginErrorMessages: function setLoginErrorMessages(state, messages) {
     state.loginErrorMessages = messages;
   },
   setRegisterErrorMessages: function setRegisterErrorMessages(state, messages) {
     state.registerErrorMessages = messages;
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
   }
 };
 var actions = {
@@ -20327,13 +20312,7 @@ var actions = {
             case 0:
               context.commit('setApiStatus', null);
               _context2.next = 3;
-<<<<<<< HEAD
-              return axios.post('/api/login', data)["catch"](function (err) {
-                return err.response || err;
-              });
-=======
               return axios.post('/api/login', data);
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
 
             case 3:
               response = _context2.sent;
@@ -20346,15 +20325,6 @@ var actions = {
               context.commit('setApiStatus', true);
               context.commit('setUser', response.data);
               return _context2.abrupt("return", false);
-<<<<<<< HEAD
-
-            case 8:
-              context.commit('setApiStatus', false);
-              context.commit('error/setCode', response.status, {
-                root: true
-              });
-
-=======
 
             case 8:
               context.commit('setApiStatus', false);
@@ -20367,7 +20337,6 @@ var actions = {
                 });
               }
 
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
             case 10:
             case "end":
               return _context2.stop();
@@ -20544,11 +20513,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!******************************!*\
   !*** ./resources/js/util.js ***!
   \******************************/
-<<<<<<< HEAD
-/*! exports provided: getCookieValue, OK, CREATED, INTERNAL_SERVER_ERROR */
-=======
 /*! exports provided: getCookieValue, OK, CREATED, INTERNAL_SERVER_ERROR, UNPROCESSABLE_ENTITY */
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20557,10 +20522,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OK", function() { return OK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATED", function() { return CREATED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INTERNAL_SERVER_ERROR", function() { return INTERNAL_SERVER_ERROR; });
-<<<<<<< HEAD
-=======
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNPROCESSABLE_ENTITY", function() { return UNPROCESSABLE_ENTITY; });
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -20595,10 +20557,7 @@ function getCookieValue(searchKey) {
 var OK = 200;
 var CREATED = 201;
 var INTERNAL_SERVER_ERROR = 500;
-<<<<<<< HEAD
-=======
 var UNPROCESSABLE_ENTITY = 422;
->>>>>>> 224c9ebe59baff021f193256d4efbeccd749301d
 
 /***/ }),
 
