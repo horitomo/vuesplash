@@ -66,8 +66,14 @@ class Photo extends Model
      */
     public function getUrlAttribute()
     {
-        return Storage::cloud()->url($this->attributes['filename']);
+        return str_replace('public/', 'storage/', $this->attributes['filename']);
+        //return Storage::url($this->attributes['filename']);
     }
+
+    /** JSONに含める属性 */
+    protected $appends = [
+        'url',
+    ];
 
     /** JSONに含める属性 */
     protected $visible = [
