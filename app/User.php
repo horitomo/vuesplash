@@ -44,5 +44,9 @@ class User extends Authenticatable
     public function photos()
     {
         return $this->hasMany('App\Photo');
-}
+    }
+
+    protected $visible = [
+        'name',
+    ];
 }

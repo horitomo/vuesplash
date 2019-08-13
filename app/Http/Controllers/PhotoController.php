@@ -15,6 +15,9 @@ class PhotoController extends Controller
     {
         // 認証が必要
         $this->middleware('auth');
+
+        // 認証が必要
+        $this->middleware('auth')->except(['index', 'download']);
     }
 
     /**
@@ -37,5 +40,34 @@ class PhotoController extends Controller
         // リソースの新規作成なので
         // レスポンスコードは201(CREATED)を返却する
         return response($photo, 201);
+    }
+
+    /**
+     * 写真一覧
+     */
+    public function index()
+    {
+        $photos = Photo::with(['owner'])
+            ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
+
+        return $photos;
+    }
+
+    /**
+     * 写真ダウンロード
+     * @param Photo $photo
+     * @return \Illuminate\Http\Response
+     */
+    public function download(Photo $photo)
+    {
+        $filePath = $photo->filename;
+
+        $fileName = ltrim($photo->filename,'public/post_images/');
+
+        $mimeType = Storage::mimeType($filePath);
+
+        $headers = [['Content-Type' => $mimeType]];
+
+        return Storage::download($filePath, $fileName, $headers);
     }
 }
