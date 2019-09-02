@@ -56,8 +56,11 @@ const routes = [
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
-                    mode: 'history', 
-                    routes
+  mode: 'history',
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  },
+  routes
 })
 
 // VueRouterインスタンスをエクスポートする
