@@ -18,6 +18,9 @@ class PhotoController extends Controller
 
         // 認証が必要
         $this->middleware('auth')->except(['index', 'download']);
+
+        // 認証が必要
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -35,7 +38,7 @@ class PhotoController extends Controller
         $photo->user_id = Auth::user()->id;
 
         $time = date("Ymdhis");
-        $photo->filename = $request->photo->storeAs('public/post_images', $time.'_'.Auth::user()->id . $extension);
+        $photo->filename = $request->photo->storeAs('public/post_images', $time.'_'.Auth::user()->id . '.' .$extension);
         $photo->save();
         // リソースの新規作成なので
         // レスポンスコードは201(CREATED)を返却する
@@ -69,5 +72,17 @@ class PhotoController extends Controller
         $headers = [['Content-Type' => $mimeType]];
 
         return Storage::download($filePath, $fileName, $headers);
+    }
+
+    /**
+     * 写真詳細
+     * @param string $id
+     * @return Photo
+     */
+    public function show(string $id)
+    {
+        $photo = Photo::where('id', $id)->with(['owner'])->first();
+
+        return $photo ?? abort(404);
     }
 }
