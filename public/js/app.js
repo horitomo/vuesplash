@@ -2414,6 +2414,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Photo: _components_Photo_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Pagination: _components_Pagination_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
+  props: {
+    page: {
+      type: Number,
+      required: false,
+      "default": 1
+    }
+  },
   data: function data() {
     return {
       photos: [],
@@ -21441,6 +21448,12 @@ var routes = [{
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
+  scrollBehavior: function scrollBehavior() {
+    return {
+      x: 0,
+      y: 0
+    };
+  },
   routes: routes
 }); // VueRouterインスタンスをエクスポートする
 // app.jsでインポートするため
