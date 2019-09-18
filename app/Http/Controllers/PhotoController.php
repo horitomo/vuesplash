@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Comment;
+use App\Http\Requests\StoreComment;
 
 class PhotoController extends Controller
 {
@@ -75,19 +77,6 @@ class PhotoController extends Controller
     }
 
     /**
-     * 写真詳細
-     * @param string $id
-     * @return Photo
-     */
-    public function show(string $id)
-    {
-        $photo = Photo::where('id', $id)
-            ->with(['owner', 'comments.author'])->first();
-
-        return $photo ?? abort(404);
-    }
-
-    /**
     * コメント投稿
     * @param Photo $photo
     * @param StoreComment $request
@@ -105,4 +94,19 @@ class PhotoController extends Controller
 
         return response($new_comment, 201);
     }
+
+    /**
+     * 写真詳細
+     * @param string $id
+     * @return Photo
+     */
+    public function show(string $id)
+    {
+        $photo = Photo::where('id', $id)
+            ->with(['owner', 'comments.author'])->first();
+
+        return $photo ?? abort(404);
+    }
+
+    
 }
