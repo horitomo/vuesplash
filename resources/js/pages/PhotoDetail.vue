@@ -25,7 +25,22 @@
       <h2 class="photo-detail__title">
         <i class="icon ion-md-chatboxes"></i>Comments
       </h2>
-      <form @submit.prevent="addComment" class="form">
+      <ul v-if="photo.comments.length > 0" class="photo-detail__comments">
+        <li
+          v-for="comment in photo.comments"
+          :key="comment.content"
+          class="photo-detail__commentItem"
+        >
+          <p class="photo-detail__commentBody">
+            {{ comment.content }}
+          </p>
+          <p class="photo-detail__commentInfo">
+            {{ comment.author.name }}
+          </p>
+        </li>
+      </ul>
+      <p v-else>No comments yet.</p>
+      <form v-if="isLogin" @submit.prevent="addComment" class="form">
         <div v-if="commentErrors" class="errors">
           <ul v-if="commentErrors.content">
             <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
@@ -57,6 +72,11 @@ export default {
       commentErrors: null
     }
   },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
+    }
+  },
   methods: {
     async fetchPhoto () {
       const response = await axios.get(`/api/photos/${this.id}`)
@@ -71,22 +91,20 @@ export default {
       const response = await axios.post(`/api/photos/${this.id}/comments`, {
         content: this.commentContent
       })
-
-      // バリデーションエラー
       if (response.status === UNPROCESSABLE_ENTITY) {
         this.commentErrors = response.data.errors
         return false
       }
-
       this.commentContent = ''
-      // エラーメッセージをクリア
       this.commentErrors = null
-
-      // その他のエラー
       if (response.status !== CREATED) {
         this.$store.commit('error/setCode', response.status)
         return false
       }
+      this.$set(this.photo, 'comments', [
+        response.data,
+        ...this.photo.comments
+      ])
     }
   },
   watch: {
